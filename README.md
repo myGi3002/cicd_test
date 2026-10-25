@@ -1,7 +1,3 @@
-# supporters-hackthon
-
-キモいコメントを見つけてスコアを競うゲームの開発リポジトリです。WebアプリとAIコメント生成は分けて開発し、AIで作成したコメントは人が確認してからゲーム用データとして登録する方針です。
-
 ## 開発環境
 
 ### 必要なもの
@@ -67,7 +63,6 @@ npm run build
 | --- | --- | --- |
 | `NEXT_PUBLIC_SUPABASE_URL` | Supabase プロジェクトの URL | クライアントで利用可能 |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase の公開用キー（anon / publishable key） | クライアントで利用可能。DBのアクセス制御は RLS で行う |
-| `SUPABASE_SERVICE_ROLE_KEY` | サーバー専用の管理用キー | 秘密情報。`NEXT_PUBLIC_` を付けず、ブラウザーへ送信しない |
 
 必要なキーは、実装する Supabase クライアントと Supabase Dashboard に表示されるキーの種類に合わせてください。サーバー用の管理キーは現在の構成では必須ではなく、管理者権限が必要なサーバー処理を実装するときだけ設定します。
 
@@ -128,13 +123,6 @@ supporters-hackthon/
 - 正解判定、スコア計算、セッション確定など、改ざんさせたくない処理はサーバー側で実行します。
 - `supabase/migrations/` で DB の変更を管理します。既存テーブルを確認せずに削除・再作成する変更は行いません。
 - `ai/` は学習・コメント生成の作業場所です。初期段階では Web アプリから AI 学習処理を呼び出しません。
-
-## 現在の状態と開発メモ
-
-- Next.js App Router、React、TypeScript、Tailwind CSS、ESLint のプロジェクトです。既存の Next.js / ESLint 設定を維持しています。
-- Supabase JavaScript Client は依存関係に含まれていますが、Supabase 接続コード、API、ゲーム機能、DB マイグレーションはまだ作成していません。
-- Supabase の `comments` テーブルは既存環境の定義を確認してからマイグレーションを作成してください。想定カラムは `id`、`content`、`is_creepy`、`created_at` ですが、この README は実環境のスキーマを保証するものではありません。
-- Python、Transformers、PyTorch など AI 用パッケージは Web アプリの依存関係に追加していません。AI 開発を始める段階で、必要な環境を `ai/` 内に分けて整備してください。
 
 ## チーム開発
 
